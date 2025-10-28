@@ -1,7 +1,7 @@
 body{
     font-family:Copperplate Gothic;
     padding: 30px;
-    background:#affff0;
+    background:#63fff7;
 }
 
 .wrapper{
@@ -61,4 +61,5 @@ h1{
     display:none;
     color:#ff3300;
     font-size:100px;
+
 }
