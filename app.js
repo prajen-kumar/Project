@@ -4,7 +4,7 @@ document.addEventListener('click', function(e){
     
     if (e.target.className === "balloon"){
         
-                e.target.style.backgroundColor = "#ededed";
+                e.target.style.backgroundColor = "#63fff7";
                 e.target.textContent = "POP!";
                 popped++;
                 removeEvent(e);
@@ -26,4 +26,5 @@ function checkAllPopped(){
         gallery.innerHTML = '';
         message.style.display = 'block';
     }
+
 };
