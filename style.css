@@ -59,10 +59,12 @@ h1{
 
 #yay-no-balloons {
     font-family:Engravers MT;
+    display:none;
     color:#ff3300;
     font-size:100px;
 
 }
+
 
 
 
