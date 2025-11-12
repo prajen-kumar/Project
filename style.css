@@ -1,70 +1,59 @@
+#head{
+    font-size: 100px;
+    color: rgb(255, 0, 0);
+    text-shadow: 4px 4px 4px rgb(120, 117, 117);
+    font-family:Perpetua Titling MT;
+}
+
 body{
-    font-family:Copperplate Gothic;
-    padding: 30px;
-    background:#63fff7;
+    animation: colour 10s infinite ease;
+}
+#box{
+    max-width: 600px;
+    height: auto;
+    background-color:rgb(0, 0, 0);
+    animation: colour 10s infinite ease;
+}
+@keyframes colour {
+    0%{
+        background-color:rgb(0, 0, 0);
+    }
+    10%{
+        background-color:rgb(84, 84, 84);
+    }
+    25%{
+        background-color: rgb(100, 99, 99);
+    }
+    50%{
+        background-color: rgb(89, 87, 87);
+    }
+    70%{
+        background-color: rgb(52, 53, 53);
+    }
+    100%{
+        background-color:rgb(0, 0, 0);
+    }
 }
 
-.wrapper{
-    max-width: 690px;
-    margin: 0 auto;
+#clock{
+    color: rgb(0, 255, 255);
+    background-color: rgb(0, 0, 0);
+   border-style:ridge;
+   box-shadow: 1px 1px 40px rgb(255, 0, 0);
+    max-width: 450px;
+    height: auto;
+    align-content: center;
+    animation: colour 10s infinite ease;
 }
-
-.blue {
-    color:#0077ff;
-}
-
-h1{
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    color: #6aff7e;
-    text-transform: uppercase;
-    font-size: 40px;
-    color: #000380;
-}
-
-#balloon-gallery div{
-    background: #4dff00;
-    height: 121px;
-    width: 119px;
-    text-align: center;
-    color: #ff3300;
-    font-size: 40px;
-    font-family: sans-serif, arial;
-    border-radius: 100%;
-    margin-top: 20px;
-    display: inline-block;
-    /* float: left; */
-    margin: 2.5px 5 px 2.5px 0px;
-}
-
-#balloon-gallery div:nth-child(3n){
-    background: #ffce00;
-    color: #ffce00;
-}
-
-#balloon-gallery div:nth-child(3n-1){
-    background:#3f7abe;
-    color:#3f7abe;
-}
-
-#balloon-gallery div:nth-child(10n){
-    background:#ff3300;
-    color: #ff3300;
-}
-
-#balloon-gallery div:nth-child(4n){
-    clear:right;
-}
-
-#yay-no-balloons {
-    font-family:Engravers MT;
-    display:none;
-    color:#ff3300;
-    font-size:100px;
+#innerClock{
+    justify-items: center;
+    font-size:70px;
+    text-overflow: ellipsis;
+    text-shadow: 2px 2px 5px black;
+    color: aqua;
+    opacity: 100%;
 
 }
-
-
-
-
+#second{
+    color: red;
+}
