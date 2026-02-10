@@ -38,8 +38,9 @@ input{
 
  }
 button:hover{
-    box-shadow:1px 1px 20px red;
+    box-shadow:1px 1px 10px red;
 }
+
 
 
 
