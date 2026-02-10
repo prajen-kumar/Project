@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Number Guessing Game</title>
+<script src="gameCore.js"></script>
+<link rel="stylesheet" href="gameStyle.css">
+</head>
+<body><div id="cont">
+    <h1>Number Guessing Game</h1>
+    <p>I'm thinking of a number between 1 and 10. Can you guess it?</p>
+    
+    <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10"><br><br>
+    <button onclick="checkGuess()">Submit Guess</button>
+    <button onclick="resetGame()">New Game</button>
+    
+    <div id="result"></div>
+    <div id="attempts"></div>
+    <div id="gameStatus"></div>
+
+<dialog id="myAlert">
+  <h2>Success!</h2>
+  <p>Your changes have been saved.</p>
+  <button id="closeAlert">OK</button>
+</dialog>
+</div>
+</body>
+</html>
