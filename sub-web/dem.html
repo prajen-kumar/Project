@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="loading-page"><p>The Pet Sellers</p>
+  <div class="loader"></div>
+  <h2>Loading<span class="d1">.</span><span class="d1">.</span><span class="d1">.</span></h2>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+        
+        function ToMain() {
+            window.location.href = "base.html";
+        }
+
+      
+        setTimeout(ToMain, 1500);
+    </script> 
+<style>
+#loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffce00;
+  color: #ff0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  z-index: 9999;
+}
+p{
+    font-size: 3rem;
+    font-family: Matura MT Script Capitals;
+    color: blue;
+    text-shadow: 2px 2px 1px red;
+  }
+/* Simple spinning circle loader */
+.loader {
+  border:10px solid #f3f3f3;
+  border-top: 10px solid #ff3300; 
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 0.6s linear infinite;
+  margin-bottom: 10px;
+}
+.d1 {
+  display: inline-block; /* ensure transform works properly */
+  animation: up 1s linear infinite;
+ 
+}
+
+.d1:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.d1:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes up {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); } /* smaller movement looks nicer */
+  100% { transform: translateY(0); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg);}
+}
+</style>

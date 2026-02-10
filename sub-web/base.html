@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="loading-page"><p id="head">The Pet Sellers</p>
+ <p id="about"> 
+  <ul>
+    <li><span><u>Our Mission:</u></span> To provide high-quality, value-for-money pets that makes companionship accessible to everyone.</li><br><br>
+    <li><span><u>The Problem We Solve:</u></span> Many families want a pet but are deterred by high costs. We bridge that gap by offering healthy pets and affordable supplies without compromising on welfare.</li>
+  </ul> 
+</p>
+<div id="buton"><a href="D:/hey/web/sub-web/type.html">⨠</a></div>
+<b><p>GO BACK TO <br> MAIN PAGE</p></b>
+</div>
+</body>
+</html>
+<style>
+    #loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffce00;
+  color: #ff0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  z-index: 9999;
+}
+li{
+  font-size:2rem;
+  font-family: Elephant;
+  animation: fade 1s ease-in;
+}
+@keyframes fade {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+span{
+  font-family: Engravers MT;
+  color:rgb(122, 73, 12);
+  
+}
+#head{
+    font-size: 4rem;
+    font-family: Matura MT Script Capitals;
+    color: blue;
+    text-shadow: 2px 2px 1px red;
+  }
+ #buton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    text-align: center;      /* Horizontal centering */
+    line-height: 50px;       /* Vertical centering (matches height) */
+    padding-bottom: 1px;
+    transition: transform 0.3s ease;
+  }
+#buton:hover{
+  transform: rotate(180deg);
+}
+a{
+  text-decoration: none;
+  color: #ffce00;
+    font-size: 44px;
+    cursor:pointer ;
+}
+
+</style>

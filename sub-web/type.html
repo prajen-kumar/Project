@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      function fun(){
+        window.location.href="dem.html"
+      }
+    </script>
+</head>
+<body>
+    <p onclick="fun()">The Pet Sellers</p>
+    <div id="contain">
+    <a href="dog.html" target="new"><img src="images/Icon/dog_ic.png" alt="dog_image"></a>
+    <a href="cat.html" target="new"><img src="images/Icon/cat_ic.png" alt="cat_image" srcset=""></a>
+    <a href="under_c.html" target="new"><img src="images/Icon/bird_ic.png" alt="bird_image" srcset=""></a>
+    <a href="under_c.html" target="new"><img src="images/Icon/acces_ic.png" alt="accessories_image" srcset=""></a>
+    </div>
+</body>
+</html>
+<style>
+      body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffce00;
+  }
+    p{
+    font-size: 4rem;
+    font-family: Matura MT Script Capitals;
+    color: blue;
+    text-shadow: 2px 2px 1px red;
+    animation:fade 1.5s ease-in;
+  }
+  @keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+        color: #ffce00;
+    }
+    100%{
+        opacity: 1;
+    }
+  }
+  p:hover{
+    color: red;
+    text-shadow: 2px 2px 1px blue;
+    cursor: alias;
+  }
+  img{
+    max-width: 300px;
+    height: 300px;
+    box-shadow: 8px 8px 2px red;
+    transition: transform 0.3s ease-in;
+  }
+  #contain{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+  img:hover{
+     transform: scale(1.09);
+     box-shadow: 16px 16px 4px red;
+    }
+</style>

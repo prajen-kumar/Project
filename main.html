@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function run(){
+            window.location.href="demlo.html";
+        }
+        function bas(){
+            window.location.href="sub-web/base.html";
+        }
+    </script>
+</head>
+<body>
+    <div id="loading-page"> <a href="sub-web/base.html"><p id="head" >The Pet Sellers</p></a>
+  <div class="loader"><p id="load" onclick="run()">BUY</p></div>
+
+</div>
+</body>
+</html>
+<style>
+    #loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffce00;
+  color: #ff0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  z-index: 9999;
+}
+#head{
+    font-size: 3rem;
+    font-family: Matura MT Script Capitals;
+    color: blue;
+    text-shadow: 2px 2px 1px red;
+    
+  }
+  a{
+    text-decoration: none;
+  }
+/* Simple spinning circle loader */
+.loader {
+  background-color: #ff0000;
+  color: #ffce00;
+  border-radius: 30%;
+  width: 110px;
+  height: 50px;
+  cursor: pointer;
+  text-align: center;    
+}
+.loader:hover{
+    background-color: #ffce00;
+    box-shadow: 1px 1px 8px red;
+}
+#load{
+    color: #000000;
+    font-size:20px;  
+    font-family: Felix Titling;
+
+}
+
+
+</style>

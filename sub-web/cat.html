@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      function fun(){
+        window.location.href="dem.html";
+      }
+    </script>
+</head>
+<body>
+    <p onclick="fun()">The Pet Sellers</p>
+   
+  <div id="loading-page">
+    <img src="images/Cat/Siamese1.jpeg" alt="">
+    <img src="images/Cat/persian.jpeg" alt="" srcset="">
+  </div><br>
+  <div id="loading-page">
+  <img src="images/Cat/Himalayan.jpeg" alt="" srcset="">
+  <img src="images/Cat/bombay.jpeg" alt="" srcset="">
+  </div><br>
+  <div id="loading-page">
+   <img src="images/Cat/bengal.jpeg" alt="" srcset="">
+   <img src="images/Cat/short_hair.jpeg" alt="cat" srcset="">
+  </div>
+</body>
+</html>
+
+<style>
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    background-color: #ffce00;
+   
+  }
+  p{
+    font-size: 3rem;
+    font-family: Matura MT Script Capitals;
+    color: blue;
+    text-shadow: 2px 2px 1px red;
+    animation: hfade 1.3s ease-in;
+  }
+  @keyframes hfade{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+        color: #ffce00;
+    }
+    100%{
+        opacity: 1;
+    }
+  }
+  p:hover{
+    color: red;
+    text-shadow: 2px 2px 1px blue;
+    cursor: alias;
+  }
+#loading-page {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+}
+#cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+}
+img{
+   max-width: 300px;
+   max-height: 160px;
+   transition: transform 1s ease ;
+  animation: fad 1s ease-in;
+}
+@keyframes fad {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity:0.5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+img:hover{
+  box-shadow: 10px 10px 1px red;
+  transform: scale(1.02);
+  cursor:not-allowed
+}
+
+</style>
