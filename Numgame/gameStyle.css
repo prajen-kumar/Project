@@ -7,7 +7,7 @@ body{
 }
 #cont{
     max-width: 900px;
-    height: 500px;
+    height: 600px;
     background-color: rgb(193, 170, 170);
     justify-items: center;
     padding-left: 20px;
@@ -37,5 +37,9 @@ input{
     height: 10mm;
 
  }
+button:hover{
+    box-shadow:1px 1px 20px red;
+}
+
 
 
