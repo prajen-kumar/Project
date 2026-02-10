@@ -23,7 +23,8 @@ p{
     font-size: 20px;
     font-family:Felix Titling ;
 }
-input{
+#guessInput{
+  border-type:dotted;  
   max-width:280px;  
 }
  button{
@@ -40,6 +41,7 @@ input{
 button:hover{
     box-shadow:1px 1px 10px red;
 }
+
 
 
 
