@@ -12,6 +12,7 @@ body{
     justify-items: center;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom:30px;
     text-align: center;
 
 }
@@ -34,4 +35,5 @@ input{
     border-radius: 20px;
     width:20mm ;
     height: 10mm;
+
  }
