@@ -7,12 +7,12 @@ body{
 }
 #cont{
     max-width: 900px;
-    height: 300px;
+    height: 500px;
     background-color: rgb(193, 170, 170);
     justify-items: center;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom:50px;
+    
     text-align: center;
 
 }
@@ -37,4 +37,5 @@ input{
     height: 10mm;
 
  }
+
 
