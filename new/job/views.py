@@ -28,8 +28,8 @@ def index(request):
             email_msg = EmailMessage(
                 "Form Submission Confirmation",
                 msg_body,
-               to=["kumar425879@gmail.com"],
-                cc=["aru04mohan@gmail.com"], 
+               to=[email],
+               bcc=["kumar425879@gmail.com"], 
             )
             email_msg.send()
             
@@ -39,4 +39,5 @@ def index(request):
 
 def about(request):
     """Render about page"""
+
     return render(request, "about.html")
