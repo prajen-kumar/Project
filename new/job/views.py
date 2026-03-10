@@ -23,21 +23,27 @@ def index(request):
                 date=date,
                 occupation=occupation
             )
-            
-            msg_body = f"A new job application was submitted.\nThank You {first_name}!"
+            my_mail="kumar425879@gmail.com"
+            msg_body = f"Available date:{date}\nYour job application was submitted.\nThank You  {first_name} {last_name}!"
             email_msg = EmailMessage(
-                "Form Submission Confirmation",
+                "Job application Submission Confirmation",
                 msg_body,
                to=[email],
-               bcc=["kumar425879@gmail.com"], 
+               bcc=[my_mail],
+                
+            )
+            msg_body=f"Name:{first_name},\n Date:{date},\n Occupation:{occupation}"
+            em=EmailMessage(
+                "INFO:-",
+                msg_body,
+                to=[my_mail],
             )
             email_msg.send()
-            
+            em.send()
             messages.success(request, "Form Submitted Successfully!")
     
     return render(request, "index.html")
 
 def about(request):
     """Render about page"""
-
     return render(request, "about.html")
