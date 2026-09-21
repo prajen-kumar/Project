@@ -10,29 +10,34 @@
         h1, h2 { color: #2c3e50; text-align: center; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { background-color: #3498db; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px; }
+        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        button { background-color: #3498db; color: white; border: none; padding: 15px 20px; font-size: 18px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px; }
         button:hover { background-color: #2980b9; }
         .question-block { margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background-color: #fafafa; }
         .question-title { font-weight: bold; margin-bottom: 10px; }
-        .option-label { display: block; margin-bottom: 8px; cursor: pointer; padding: 8px; border-radius: 5px; transition: background 0.2s; }
+        .option-label { display: block; margin-bottom: 8px; cursor: pointer; padding: 10px; border-radius: 5px; background: #fff; border: 1px solid #ddd; transition: background 0.2s; }
         .option-label:hover { background-color: #e9ecef; }
         .correct { background-color: #d4edda !important; border-left: 5px solid #28a745; }
         .incorrect { background-color: #f8d7da !important; border-left: 5px solid #dc3545; }
         #quiz-section, #result-section { display: none; }
         .score-display { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; color: #27ae60; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container" id="reg-section">
     <h1>Value Education Exam</h1>
-    <p style="text-align:center;">Please enter your details to begin.</p>
-    <div class="form-group"><label>Name</label><input type="text" id="s_name" required></div>
-    <div class="form-group"><label>Roll Number</label><input type="text" id="s_roll" required></div>
-    <div class="form-group"><label>Register Number</label><input type="text" id="s_reg" required></div>
-    <div class="form-group"><label>Department</label><input type="text" id="s_dept" required></div>
-    <button onclick="startQuiz()">Start Quiz</button>
+    <p class="subtitle">Please enter your details to begin.</p>
+    
+    <!-- Wrapped in a form for native mobile keyboard support -->
+    <form id="reg-form" onsubmit="event.preventDefault(); startQuiz();">
+        <div class="form-group"><label>Name</label><input type="text" id="s_name" required></div>
+        <div class="form-group"><label>Roll Number</label><input type="text" id="s_roll" required></div>
+        <div class="form-group"><label>Register Number</label><input type="text" id="s_reg" required></div>
+        <div class="form-group"><label>Department</label><input type="text" id="s_dept" required></div>
+        <button type="submit">Start Quiz</button>
+    </form>
 </div>
 
 <div class="container" id="quiz-section">
@@ -44,7 +49,7 @@
 <div class="container" id="result-section">
     <h1>Quiz Completed!</h1>
     <div class="score-display" id="final-score"></div>
-    <p style="text-align:center;">Your score has been recorded. Scroll down to review your answers.</p>
+    <p class="subtitle">Your score has been recorded. Scroll down to review your answers.</p>
     <div id="review-container"></div>
 </div>
 
@@ -60,13 +65,14 @@
         const re = document.getElementById('s_reg').value;
         const d = document.getElementById('s_dept').value;
         
-        if(!n || !ro || !re || !d) { alert("Please fill all fields."); return; }
-        
         studentData = { name: n, rollNo: ro, regNo: re, dept: d };
         
         document.getElementById('reg-section').style.display = 'none';
         document.getElementById('quiz-section').style.display = 'block';
         renderQuestions();
+        
+        // Scroll back to the top for mobile users
+        window.scrollTo(0, 0);
     }
 
     function renderQuestions() {
@@ -77,7 +83,7 @@
                 <div class="question-title">${index + 1}. ${q.question}</div>`;
             q.options.forEach((opt, oIndex) => {
                 html += `<label class="option-label" id="label-${index}-${oIndex}">
-                    <input type="radio" name="q${index}" value="${opt}"> ${opt}
+                    <input type="radio" name="q${index}" value="${opt.replace(/"/g, '&quot;')}"> ${opt}
                 </label>`;
             });
             html += `</div>`;
@@ -92,7 +98,6 @@
 
         quizData.forEach((q, index) => {
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            
             if (selected) {
                 if (selected.value === q.answer) {
                     score++;
@@ -118,6 +123,9 @@
         }
 
         showResults(score);
+        
+        // Scroll back to the top to see the score
+        window.scrollTo(0, 0);
     }
 
     function showResults(score) {
@@ -130,13 +138,4 @@
         quizData.forEach((q, index) => {
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
             const userAns = selected ? selected.value : "None";
-            const isCorrect = userAns === q.answer;
-            
-            html += `<div class="question-block ${isCorrect ? 'correct' : 'incorrect'}">
-                <div class="question-title">${index + 1}. ${q.question}</div>
-                <p><strong>Your Answer:</strong> ${userAns}</p>
-                <p><strong>Correct Answer:</strong> ${q.answer}</p>
-            </div>`;
-        });
-        container.innerHTML = html;
-    
+            const isCorrect = userAns === q.ans
