@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Education Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #3498db; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 20px; }
+        button:hover { background-color: #2980b9; }
+        .question-block { margin-bottom: 25px; padding: 15px; border: 1px solid #eee; border-radius: 8px; background-color: #fafafa; }
+        .question-title { font-weight: bold; margin-bottom: 10px; }
+        .option-label { display: block; margin-bottom: 8px; cursor: pointer; padding: 8px; border-radius: 5px; transition: background 0.2s; }
+        .option-label:hover { background-color: #e9ecef; }
+        .correct { background-color: #d4edda !important; border-left: 5px solid #28a745; }
+        .incorrect { background-color: #f8d7da !important; border-left: 5px solid #dc3545; }
+        #quiz-section, #result-section { display: none; }
+        .score-display { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; color: #27ae60; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="reg-section">
+    <h1>Value Education Exam</h1>
+    <p style="text-align:center;">Please enter your details to begin.</p>
+    <div class="form-group"><label>Name</label><input type="text" id="s_name" required></div>
+    <div class="form-group"><label>Roll Number</label><input type="text" id="s_roll" required></div>
+    <div class="form-group"><label>Register Number</label><input type="text" id="s_reg" required></div>
+    <div class="form-group"><label>Department</label><input type="text" id="s_dept" required></div>
+    <button onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<div class="container" id="quiz-section">
+    <h2>Value Education - 50 Questions</h2>
+    <div id="questions-container"></div>
+    <button onclick="submitQuiz()" id="submit-btn">Submit Quiz</button>
+</div>
+
+<div class="container" id="result-section">
+    <h1>Quiz Completed!</h1>
+    <div class="score-display" id="final-score"></div>
+    <p style="text-align:center;">Your score has been recorded. Scroll down to review your answers.</p>
+    <div id="review-container"></div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-Pek2aLD1YgQ_75ACyLgxqm6AVy5n6b7Y7yEt1sKZz38cZPbn5-j7rxHrC3DFtpOr/exec";
+
+    const quizData = [{"question": "Which virtue is often considered the foundation of positive character development?", "options": ["Arrogance", "Humility", "Apathy", "Deceit"], "answer": "Humility"}, {"question": "What were the core terrestrial values identified by the National Curriculum Framework for school education in 2000", "options": ["Loyalty, honesty, bravery, kindness, and fairness", "Truth, ethical conduct, peace, admiration, and non-violence", "Creativity, innovation, critical thinking, communication, and collaboration", "Respect, responsibility, trustworthiness, fairness, and citizenship"], "answer": "Loyalty, honesty, bravery, kindness, and fairness"}, {"question": "What is the primary consequence of poverty on an individual's overall well-being?", "options": ["Increased access to education", "Improved healthcare access", "Limited access to basic necessities", "Higher social status"], "answer": "Limited access to basic necessities"}, {"question": "What is the main factor contributing to unemployment?", "options": ["economic downturns", "Low education levels", "Inflation", "Technological advancement"], "answer": "economic downturns"}, {"question": "What is the concept of \"freedom of conscience\"?", "options": ["The right to criticize all religions openly", "The obligation to follow a specific religion", "The right to practice one's religion without interference", "The right to change one's religious beliefs or principles"], "answer": "The right to change one's religious beliefs or principles"}, {"question": "The one human value which is highly revered and cherished by mankind", "options": ["Violence", "Truthfulness", "selfishness", "sexual abuse"], "answer": "Truthfulness"}, {"question": "What role does sacrifice play in building strong relationships?", "options": ["It weakens relationships by creating conflicts", "It strengthens relationships by fostering trust and mutual support", "It has no impact on relationships", "It leads to isolation and loneliness"], "answer": "It strengthens relationships by fostering trust and mutual support"}, {"question": "Which of the following is not a risk factor for adolescent depression?", "options": ["Arrogance", "Substance abuse", "Academic achievement", "Chronic illness"], "answer": "Academic achievement"}, {"question": "Combing their hair reminds Sikhs that _________", "options": ["They should trim their hair periodically", "They should be willing to help others", "Their lives need to be tidy and organised", "They should sacrifice their hair to attain salvation"], "answer": "Their lives need to be tidy and organised"}, {"question": "Which one of the following statements is/are true\nEducation is a life-long process.\nEducation is a systematic process.\nEducation is a modification of behaviour.\nEducation is instruction and direction.", "options": ["I and II", "I, II and III", "I and IV", "All of these"], "answer": "All of these"}, {"question": "How does Value Education contribute to the student\u2019s character and personality", "options": ["By encouraging them to break the law and disregard rules and regulations", "By teaching them to be abusive towards vulnerable members of society", "By developing a positive view of life in their minds and making them responsible and sensible", "By making them arrogant and authoritarian"], "answer": "By developing a positive view of life in their minds and making them responsible and sensible"}, {"question": "The women in India still suffer from inequality because of lack of __________ to children and young adults", "options": ["Sensitization towards differently abled", "Gender sensitization", "Sensitization towards senior citizens", "Sensitization towards caste discrimination"], "answer": "Gender sensitization"}, {"question": "What is the term for discrimination against individuals based on their age?", "options": ["Sexism", "Racism", "Ageism", "Homophobia"], "answer": "Ageism"}, {"question": "Which international treaty focuses on the rights of women and their protection against discrimination and violence?", "options": ["Universal Declaration of Human Rights", "Convention on the Rights of the Child", "Convention on the Elimination of All Forms of Discrimination Against Women (CEDAW)", "International Covenant on Economic, Social, and Cultural Rights"], "answer": "Convention on the Elimination of All Forms of Discrimination Against Women (CEDAW)"}, {"question": "When was the National Resource Centre for Value Education (NRCVE) established at NCERT", "options": ["14th September 2000", "14th September 1990", "14th September 2010", "14th September 1980"], "answer": "14th September 2000"}, {"question": "What term describes the selfless concern for the well-being of others?", "options": ["Egoism", "Utilitarianism", "Altruism", "Individualism"], "answer": "Altruism"}, {"question": "Panj Kakar refers to the five", "options": ["External identities of sikh devotees", "Internal identities of sikh devotees", "Essential theories in sikhism", "Renowned Sikh Gurus"], "answer": "External identities of sikh devotees"}, {"question": "Which social issue involves the unequal distribution of wealth and resources in a society?", "options": ["Substance abuse", "Homelessness", "Poverty", "Inequality"], "answer": "Inequality"}, {"question": "Who was the brave woman who led a battalion of 40 men in the battle of Muktsar?", "options": ["Bibi Bhani", "Mai Bhago kaur", "Bebe Nanaki", "Mata Tripta"], "answer": "Mai Bhago kaur"}, {"question": "Which international document serves as the foundation for the principles of non-discrimination and equality in human rights?", "options": ["Universal Declaration of Human Rights", "Geneva Convention", "United Nations Charter", "Kyoto Protocol"], "answer": "Universal Declaration of Human Rights"}, {"question": "Value based education aims at training the students in.", "options": ["Personality Development", "Cultural Development", "Sportsmanship Development", "Co-Curricular Development"], "answer": "Personality Development"}, {"question": "Which of the following statement is true regarding gender?", "options": ["It is a social construct", "It is a heredity factor", "It is a culture", "It is biologically determined"], "answer": "It is a social construct"}, {"question": "A harmonious world is created by values at 4 levels. These are", "options": ["Home, family, society, country", "Individual, family, society, universe", "School, home, office, temple", "None of the above"], "answer": "Individual, family, society, universe"}, {"question": "In a typical nuclear family structure, who are considered immediate family members?", "options": ["Parents, grandparents, and siblings", "Parents, children, and siblings", "Aunts, uncles, and cousins", "Friends and neighbors"], "answer": "Parents, children, and siblings"}, {"question": "In the context of social issues, what is the main consequence of unemployment?", "options": ["Increased disposable income", "Economic stability", "Financial distress", "Higher social status"], "answer": "Financial distress"}, {"question": "How can value education contribute to conflict resolution on a global scale?", "options": ["By advocating for military interventions", "By promoting diplomacy, dialogue, and negotiation", "By supporting arms race", "By encouraging territorial disputes"], "answer": "By promoting diplomacy, dialogue, and negotiation"}, {"question": "Nurturers are individuals with a large -------------", "options": ["Heart", "Lungs", "Brains", "Hands"], "answer": "Heart"}, {"question": "In Indian Constitution, the idea of \"A Union of States in the Indian Constitution\" has been derived from", "options": ["Constitution of Belgium", "The Australian Constitution", "Constitution of Colombia", "Constitution of Bhutan"], "answer": "The Australian Constitution"}, {"question": "What role does creativity play in scientific vision?", "options": ["It has no relevance in scientific research", "It can lead to imaginative approaches and innovative solutions", "It hinders the scientific process", "It restricts scientists to established methods"], "answer": "It can lead to imaginative approaches and innovative solutions"}, {"question": "Values related to right conduct is  ________.", "options": ["Attention", "Accuracy", "Empathy", "Ethical skills"], "answer": "Ethical skills"}, {"question": "It is a crime committed by a person of respectability and high social status", "options": ["Blue collar crime", "Red collar crime", "White collar crime", "Black collar crime"], "answer": "White collar crime"}, {"question": "What is the primary focus of the National Commission for Protection of Child Rights (NCPCR) in India?", "options": ["Protecting the rights of adults", "Protecting the rights of women", "Protecting the rights of children", "Protecting the rights of transgender individuals"], "answer": "Protecting the rights of children"}, {"question": "Value Education takes place only at", "options": ["School", "Institutions", "Voluntary youth organizations", "All the above"], "answer": "All the above"}, {"question": "Who helped to provide leadership for the Sikhs in a very difficult and tumultuous time following the passing away of Gur Gobind Singh?", "options": ["Maharaja Ranjit Singh", "Sardarni  Sharnagat Kaur", "Mata Kishan Kaur", "Mata Sundri"], "answer": "Mata Sundri"}, {"question": "What term is commonly used to refer to individuals who may have physical, sensory, cognitive, or other impairments that may impact their daily life?", "options": ["Disabled", "Differently abled", "Impaired", "Special needs"], "answer": "Differently abled"}, {"question": "What is the significance of promoting tolerance and inclusivity in value education?", "options": ["It encourages discrimination", "It fosters social cohesion and harmony", "It leads to cultural isolation", "It promotes ethnocentrism"], "answer": "It fosters social cohesion and harmony"}, {"question": "What is introspection?", "options": ["The study of external phenomena and their causes", "The process of examining one's thoughts, feelings, and experiences", "The observation of others' behavior", "The analysis of historical events"], "answer": "The process of examining one's thoughts, feelings, and experiences"}, {"question": "Which of the following is a common barrier to effective value education for national and global development?", "options": ["Lack of access to education", "Promoting cultural diversity", "Encouraging environmental sustainability", "Fostering empathy and compassion"], "answer": "Lack of access to education"}, {"question": "________ integration means that bringing about the prevailing economic, social and\nCultural differences among people.", "options": ["National", "Cultural", "Religious", "State"], "answer": "National"}, {"question": "A harmonious world is created by values at 4 levels. These are", "options": ["Home, Family, Office, Country", "School, home, office, temple", "Individual, family, society, universe", "None of the above"], "answer": "Individual, family, society, universe"}, {"question": "The __________ system should promote the earth citizenship thinking", "options": ["Educational", "Economical", "Political", "Cultural"], "answer": "Educational"}, {"question": "What is the importance of Value Education in today's society", "options": ["It promotes conflict between individuals", "It encourages solidarity, living in harmony and love for nature", "It encourages social exclusion", "It fosters discrimination"], "answer": "It encourages solidarity, living in harmony and love for nature"}, {"question": "Which group is covered under the term \"marginalized people\"?", "options": ["All citizens", "Only women", "Specific ethnic groups", "Vulnerable and disadvantaged populations"], "answer": "Vulnerable and disadvantaged populations"}, {"question": "_________ and _________services are to be made as integral component of education.", "options": ["General, practical", "Practical, utilitarian", "Innovative, social", "Social, national"], "answer": "Social, national"}, {"question": "The general categories of communications are \u2013", "options": ["Speech, writing", "Printing", "Electronic communication", "All of the above"], "answer": "All of the above"}, {"question": "Education can play an important role in building positive attitudes about _______________", "options": ["Environment", "Scientific", "Health", "Systematics"], "answer": "Environment"}, {"question": "Name the fifth Guru, who had the boldness to challenge the contemporary ruler s oppressive ways and faced martyrdom.", "options": ["Guru Teg Bahadur ji", "Guru Hargobind ji", "Guru Arjan Dev ji", "Guru Amar Das ji"], "answer": "Guru Arjan Dev ji"}, {"question": "________ are festivals that are celebrated by all Indians and in all parts of the country, regardless of language, religion or culture. They remind us of our common nationality.", "options": ["Independence day, Republic day, Gandhi Jayanti", "Independence day, Republic day, Valmiki Jayanti", "Independence day, Republic day, Amdedkar Jayanti", "Independence day, Republic day, Kanaka Jayanti"], "answer": "Independence day, Republic day, Gandhi Jayanti"}, {"question": "------------- means truthfulness.", "options": ["Honesty", "Accountability", "Dutifulness", "Responsibility"], "answer": "Honesty"}, {"question": "A written statement of policies and principles that guides the behavior of all employees is called ________.", "options": ["Code of ethics", "Word of ethics", "Ethical dilemma", "Ethics"], "answer": "Code of ethics"}];
+    let studentData = {};
+
+    function startQuiz() {
+        const n = document.getElementById('s_name').value;
+        const ro = document.getElementById('s_roll').value;
+        const re = document.getElementById('s_reg').value;
+        const d = document.getElementById('s_dept').value;
+        
+        if(!n || !ro || !re || !d) { alert("Please fill all fields."); return; }
+        
+        studentData = { name: n, rollNo: ro, regNo: re, dept: d };
+        
+        document.getElementById('reg-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        renderQuestions();
+    }
+
+    function renderQuestions() {
+        const container = document.getElementById('questions-container');
+        let html = '';
+        quizData.forEach((q, index) => {
+            html += `<div class="question-block" id="qblock-${index}">
+                <div class="question-title">${index + 1}. ${q.question}</div>`;
+            q.options.forEach((opt, oIndex) => {
+                html += `<label class="option-label" id="label-${index}-${oIndex}">
+                    <input type="radio" name="q${index}" value="${opt}"> ${opt}
+                </label>`;
+            });
+            html += `</div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').innerText = "Submitting...";
+
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            
+            if (selected) {
+                if (selected.value === q.answer) {
+                    score++;
+                }
+            }
+        });
+
+        const payload = {
+            name: studentData.name,
+            rollNo: studentData.rollNo,
+            regNo: studentData.regNo,
+            dept: studentData.dept,
+            score: `${score} / 50`
+        };
+
+        if (SCRIPT_URL) {
+            fetch(SCRIPT_URL, {
+                redirect: "follow",
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: { "Content-Type": "text/plain;charset=utf-8" }
+            }).catch(e => console.log("Data send failed", e));
+        }
+
+        showResults(score);
+    }
+
+    function showResults(score) {
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('result-section').style.display = 'block';
+        document.getElementById('final-score').innerText = `Your Score: ${score} / 50`;
+
+        const container = document.getElementById('review-container');
+        let html = '';
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const userAns = selected ? selected.value : "None";
+            const isCorrect = userAns === q.answer;
+            
+            html += `<div class="question-block ${isCorrect ? 'correct' : 'incorrect'}">
+                <div class="question-title">${index + 1}. ${q.question}</div>
+                <p><strong>Your Answer:</strong> ${userAns}</p>
+                <p><strong>Correct Answer:</strong> ${q.answer}</p>
+            </div>`;
+        });
+        container.innerHTML = html;
+    
